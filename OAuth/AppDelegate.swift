@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let oauthToken          = KeychainPreferences.sharedInstance.string(forKey: "OAuthToken")
         let oauthRefreshToken   = KeychainPreferences.sharedInstance.string(forKey: "OAuthRefreshToken")
         
-//        if (oauthToken != nil && oauthRefreshToken != nil) {
-//            self.window?.rootViewController = AppDelegate.mainViewController;
-//        }
+        if (oauthToken != nil && oauthRefreshToken != nil) {
+            self.window?.rootViewController = AppDelegate.mainViewController;
+        }
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
