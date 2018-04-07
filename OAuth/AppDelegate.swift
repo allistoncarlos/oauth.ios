@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Properties
     var window: UIWindow?
     private static let mainViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController")
+    private static let loginViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
 
     // MARK: - Application Methods
     func applicationDidFinishLaunching(_ application: UIApplication) {
@@ -108,5 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         )
     }
+    
+    static func logoutView() {
+        UIApplication.shared.delegate!.window??.rootViewController = AppDelegate.loginViewController;
+    }
 }
-

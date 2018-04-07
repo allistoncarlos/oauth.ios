@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WebKit
+import Prephirences
 
 class MainViewController: UIViewController {
 
@@ -18,5 +20,17 @@ class MainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        let dataTypes = Set([WKWebsiteDataTypeCookies,
+                             WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeSessionStorage,
+                             WKWebsiteDataTypeWebSQLDatabases, WKWebsiteDataTypeIndexedDBDatabases])
+        WKWebsiteDataStore.default().removeData(ofTypes: dataTypes, modifiedSince: NSDate.distantPast, completionHandler: {})
+        
+        KeychainPreferences.sharedInstance["OAuthToken"]         = nil
+        KeychainPreferences.sharedInstance["OAuthRefreshToken"]  = nil
+        
+        AppDelegate.logoutView()
     }
 }

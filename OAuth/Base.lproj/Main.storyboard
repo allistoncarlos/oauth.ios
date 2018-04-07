@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="Q1S-Oo-fPq">
             <objects>
-                <viewController id="EcS-K0-tGG" customClass="LoginViewController" customModule="OAuth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="EcS-K0-tGG" customClass="LoginViewController" customModule="OAuth" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3d5-Yg-T9w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,19 +67,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFT-9C-OHz">
+                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <state key="normal" title="SAIR">
+                                    <color key="titleColor" red="1" green="0.1158826245" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzR-zQ-5Ta"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="E7r-Lo-ubX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5tn-u4-ev7"/>
                             <constraint firstItem="E7r-Lo-ubX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hBm-YP-zM6"/>
+                            <constraint firstItem="OFT-9C-OHz" firstAttribute="leading" secondItem="E7r-Lo-ubX" secondAttribute="leading" id="lS6-sm-evM"/>
+                            <constraint firstAttribute="bottom" secondItem="OFT-9C-OHz" secondAttribute="bottom" constant="20" symbolic="YES" id="tMu-G6-Bgo"/>
                             <constraint firstItem="E7r-Lo-ubX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="vVD-cf-PXv"/>
+                            <constraint firstItem="OFT-9C-OHz" firstAttribute="trailing" secondItem="E7r-Lo-ubX" secondAttribute="trailing" id="wjX-xq-E1i"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
+            <point key="canvasLocation" x="175" y="105"/>
         </scene>
     </scenes>
     <resources>
