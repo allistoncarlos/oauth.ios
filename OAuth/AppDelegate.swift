@@ -7,40 +7,78 @@
 //
 
 import UIKit
+import OAuthSwift
+import Prephirences
+import Alamofire
+import OAuthSwiftAlamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    // MARK: - Properties
     var window: UIWindow?
+    private static let mainViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController")
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    // MARK: - Application Methods
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        let oauthToken          = KeychainPreferences.sharedInstance.string(forKey: "OAuthToken")
+        let oauthRefreshToken   = KeychainPreferences.sharedInstance.string(forKey: "OAuthRefreshToken")
+        
+//        if (oauthToken != nil && oauthRefreshToken != nil) {
+//            self.window?.rootViewController = AppDelegate.mainViewController;
+//        }
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        applicationHandle(url: url)
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        applicationHandle(url: url)
+        return true
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // MARK: - Static Methods
+    static func getAppProperty(forKey key: String) -> String {
+        let dictionary: NSDictionary = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)!
+        return dictionary[key] as! String
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    // MARK: - Private Methods
+    private func applicationHandle(url: URL) {
+        if (url.host == "oauth-callback") {
+            OAuthSwift.handle(url: url)
+        } else {
+            OAuthSwift.handle(url: url)
+        }
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    static func authorize(viewController: UIViewController) {
+        CustomOAuth2.sharedInstance.authorizeURLHandler = SafariURLHandler(viewController: viewController, oauthSwift: CustomOAuth2.sharedInstance)
+        
+        let _ = CustomOAuth2.sharedInstance.authorize(
+            withCallbackURL: URL(string: "<URL_SCHEME>://oauth-callback")!,
+            scope: "<API_NAME>",
+            state: generateState(withLength: 20),
+            success: { credential, response, parameters in
+                debugPrint("Authenticated")
+                
+                KeychainPreferences.sharedInstance["OAuthToken"]         = credential.oauthToken
+                KeychainPreferences.sharedInstance["OAuthRefreshToken"]  = credential.oauthRefreshToken
+                
+                debugPrint(credential.oauthToken)
+                debugPrint(credential.oauthRefreshToken)
+                
+                SessionManager.default.adapter = OAuthSwift2RequestAdapter(CustomOAuth2.sharedInstance)
+                SessionManager.default.retrier = OAuthSwift2RequestAdapter(CustomOAuth2.sharedInstance)
+                
+                viewController.show(AppDelegate.mainViewController, sender: nil)
+        },
+            failure: { error in
+                print(error.localizedDescription, terminator: "")
+        }
+        )
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 

@@ -1,0 +1,45 @@
+PODS:
+  - Alamofire (4.7.1)
+  - Alamofire-SwiftyJSON (3.0.0):
+    - Alamofire (~> 4.5)
+    - SwiftyJSON (~> 4.0.0)
+  - OAuthSwift (1.2.0)
+  - OAuthSwiftAlamofire (0.1.0):
+    - Alamofire
+    - OAuthSwift
+  - Prephirences (4.0.0):
+    - Prephirences/Core (= 4.0.0)
+    - Prephirences/Keys (= 4.0.0)
+  - Prephirences/Core (4.0.0)
+  - Prephirences/Keys (4.0.0):
+    - Prephirences/Core
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Alamofire-SwiftyJSON
+  - OAuthSwift
+  - OAuthSwiftAlamofire
+  - Prephirences
+  - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Alamofire-SwiftyJSON
+    - OAuthSwift
+    - OAuthSwiftAlamofire
+    - Prephirences
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  Alamofire-SwiftyJSON: 2b3649d57dc7bb2880fb8b86f8bb969397666916
+  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
+  OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
+  Prephirences: d3f1d1db3959640f754d7c75325dccf78722cd12
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 11cd8c5f21baa02109cc9e846ad4d3b8b612b399
+
+COCOAPODS: 1.5.0
