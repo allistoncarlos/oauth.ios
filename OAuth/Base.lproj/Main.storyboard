@@ -20,18 +20,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUe-Wd-1cM">
-                                <rect key="frame" x="16" y="20" width="343" height="30"/>
+                                <rect key="frame" x="16" y="41" width="343" height="30"/>
                                 <state key="normal" title="Entrar"/>
                                 <connections>
                                     <action selector="loginTouched:" destination="EcS-K0-tGG" eventType="touchUpInside" id="NPd-TG-3my"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM4-7K-VbO">
+                                <rect key="frame" x="58" y="79" width="258" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BQx-5S-kDJ"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Github"/>
+                                <connections>
+                                    <action selector="githubLoginTouched:" destination="EcS-K0-tGG" eventType="touchUpInside" id="6EG-tN-WYs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="top" secondItem="RWq-y4-0yf" secondAttribute="top" id="8vH-pH-p1v"/>
-                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="leading" secondItem="3d5-Yg-T9w" secondAttribute="leadingMargin" id="PFf-3F-cSv"/>
-                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="trailing" secondItem="3d5-Yg-T9w" secondAttribute="trailingMargin" id="aHN-IL-qA6"/>
+                            <constraint firstItem="bM4-7K-VbO" firstAttribute="top" secondItem="MUe-Wd-1cM" secondAttribute="bottom" constant="8" symbolic="YES" id="BHt-05-EUr"/>
+                            <constraint firstItem="bM4-7K-VbO" firstAttribute="centerX" secondItem="MUe-Wd-1cM" secondAttribute="centerX" id="BzP-Da-YRt"/>
+                            <constraint firstItem="bM4-7K-VbO" firstAttribute="leading" secondItem="RWq-y4-0yf" secondAttribute="leading" constant="58" id="HEz-4f-mfp"/>
+                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="trailing" secondItem="3d5-Yg-T9w" secondAttribute="trailingMargin" id="Z1t-tW-4ex"/>
+                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="top" secondItem="RWq-y4-0yf" secondAttribute="top" constant="21" id="cPr-UZ-Ler"/>
+                            <constraint firstItem="MUe-Wd-1cM" firstAttribute="leading" secondItem="3d5-Yg-T9w" secondAttribute="leadingMargin" id="fRT-Pq-Gwe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RWq-y4-0yf"/>
                     </view>
@@ -69,4 +82,7 @@
             <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Github" width="144" height="25"/>
+    </resources>
 </document>

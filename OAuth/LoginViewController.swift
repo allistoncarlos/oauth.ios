@@ -17,4 +17,8 @@ class LoginViewController: UIViewController {
     @IBAction func loginTouched(_ sender: Any) {
         AppDelegate.authorize(viewController: self)
     }
+    
+    @IBAction func githubLoginTouched(_ sender: Any) {
+        AppDelegate.authorizeGitHub(viewController: self)
+    }
 }

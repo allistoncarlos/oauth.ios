@@ -47,7 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Private Methods
     private func applicationHandle(url: URL) {
-        if (url.host == "oauth-callback") {
+        if (url.host == "oauth-callback" ||
+            url.host == "oauth-github-callback") {
             OAuthSwift.handle(url: url)
         } else {
             OAuthSwift.handle(url: url)
@@ -74,10 +75,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SessionManager.default.retrier = OAuthSwift2RequestAdapter(CustomOAuth2.sharedInstance)
                 
                 viewController.show(AppDelegate.mainViewController, sender: nil)
-        },
+            },
             failure: { error in
                 print(error.localizedDescription, terminator: "")
-        }
+            }
+        )
+    }
+    
+    static func authorizeGitHub(viewController: UIViewController) {
+        GitHubOAuth2.sharedInstance.authorizeURLHandler = SafariURLHandler(viewController: viewController, oauthSwift: GitHubOAuth2.sharedInstance)
+        
+        let _ = GitHubOAuth2.sharedInstance.authorize(
+            withCallbackURL: URL(string: "<URL_SCHEME>://oauth-github-callback")!,
+            scope: "<API_NAME>",
+            state: generateState(withLength: 20),
+            success: { credential, response, parameters in
+                debugPrint("Authenticated")
+                
+                KeychainPreferences.sharedInstance["OAuthToken"]         = credential.oauthToken
+                KeychainPreferences.sharedInstance["OAuthRefreshToken"]  = credential.oauthRefreshToken
+                
+                debugPrint(credential.oauthToken)
+                debugPrint(credential.oauthRefreshToken)
+                
+                SessionManager.default.adapter = OAuthSwift2RequestAdapter(CustomOAuth2.sharedInstance)
+                SessionManager.default.retrier = OAuthSwift2RequestAdapter(CustomOAuth2.sharedInstance)
+                
+                viewController.show(AppDelegate.mainViewController, sender: nil)
+            },
+            failure: { error in
+                print(error.localizedDescription, terminator: "")
+            }
         )
     }
 }
